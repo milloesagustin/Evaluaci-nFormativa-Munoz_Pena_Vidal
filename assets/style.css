@@ -1,0 +1,176 @@
+/* Reset básico para limpiar márgenes del navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Empuja el footer al fondo de la pantalla */
+}
+
+/* Cabecera y Navegación */
+header {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.logo span {
+    color: #0056b3; /* Azul para resaltar "LIBROS" */
+}
+
+.nav {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 8px 12px;
+}
+
+.nav a.btn {
+    background-color: #000;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.nav a.btn:hover {
+    background-color: #444;
+}
+
+/* Textos principales */
+.hero {
+    text-align: center;
+    padding: 2rem 2rem 1rem 2rem;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Contenedores Blancos (Registro y Login unificados) */
+.form-container, 
+#loginForm {
+    max-width: 500px;
+    margin: 0 auto 2rem auto;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Cajas de agrupación para Labels e Inputs */
+.form-group, 
+#loginForm div:not(#errorLogin) {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Cajas de texto */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Sección de Checkboxes (Géneros Literarios) */
+.checkbox-group p {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.checkbox-group label {
+    font-weight: normal;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 6px;
+    width: auto;
+    cursor: pointer;
+}
+
+/* Botones Principales (Registrar e Iniciar Sesión) */
+button[type="submit"] {
+    background-color: #000;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #333;
+}
+
+/* Mensajes de Error JS */
+.error-msg, 
+.error {
+    color: #d93025;
+    font-size: 0.85rem;
+    font-weight: bold;
+    min-height: 18px;
+    margin-top: 5px;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #eaeaea;
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: #555;
+}
