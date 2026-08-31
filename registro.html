@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZONALIBROS - Registro de Usuario</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ZONA<span>LIBROS</span></div>
+        <nav>
+            <ul class="nav">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="login.html" class="btn">INICIAR SESIÓN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="registro-section">
+            <h1 class="hero__title">Registro de usuario</h1>
+            
+            <article class="form-container">
+                <form id="formRegistro">
+                    <div class="form-group">
+                        <label for="nombre">NOMBRE COMPLETO</label>
+                        <input type="text" id="nombre" maxlength="100">
+                        <span id="errorNombre" class="error-msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">CORREO</label>
+                        <input type="email" id="correo" maxlength="60">
+                        <span id="errorCorreo" class="error-msg"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">CONTRASEÑA</label>
+                        <input type="password" id="password">
+                        <span id="errorPassword" class="error-msg"></span>
+                    </div>
+
+                    <!-- 4. Confirmar Contraseña -->
+                    <div class="form-group">
+                        <label for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
+                        <input type="password" id="confirmPassword">
+                        <span id="errorConfirmPassword" class="error-msg"></span>
+                    </div>
+
+                    <!-- 5. Teléfono -->
+                    <div class="form-group">
+                        <label for="telefono">TELEFONO (opcional)</label>
+                        <input type="number" id="telefono">
+                        <span id="errorTelefono" class="error-msg"></span>
+                    </div>
+
+                    <!-- 6. Géneros Favoritos -->
+                    <div class="form-group checkbox-group">
+                        <p>TIPO DE GENERO</p>
+                        <label><input type="checkbox" name="genero" value="FICCION"> FICCIÓN</label>
+                        <label><input type="checkbox" name="genero" value="NO FICCION"> NO FICCIÓN</label>
+                        <label><input type="checkbox" name="genero" value="MISTERIO"> MISTERIO</label>
+                        <label><input type="checkbox" name="genero" value="TERROR"> TERROR</label>
+                        <label><input type="checkbox" name="genero" value="SUSPENSO"> SUSPENSO</label>
+                        <label><input type="checkbox" name="genero" value="HISTORIA"> HISTORIA</label>
+                        <span id="errorGenero" class="error-msg"></span>
+                    </div>
+
+                    <button type="submit" class="btn" id="btn-registrar">REGISTRAR</button>
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>2026 ZONALIBROS. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
