@@ -29,21 +29,20 @@
     <section class="Inicio de sesión">
         <h2> INICIO DE SESIÓN</h2>
 
-        <form id="loginFormulario" novalidate>
+        <form id="loginForm" novalidate>
             <div>
-                <label for="correo">Correo Electrónico:</label>
-                <input type="email" id="correo" name ="correo">
+                <label for="correoLogin">Correo Electrónico:</label>
+                <input type="email" id="correoLogin" name="correoLogin">
             </div>
 
             <div>
-                <label for="contraseña">Contraseña:</label>
-                <input type="password" id="contraseña" name="contraseña">
+                <label for="passwordLogin">Contraseña:</label>
+                <input type="password" id="passwordLogin" name="passwordLogin">
             </div>
 
-            <div id="mensajeError" style="color: red; display: none;"></div>
+            <div id="errorLogin" class="error" style="color: red; display: none;"></div>
 
-            <button type = "submit" id ="btnLogin"> Iniciar Sesión</button>
-
+            <button type="submit" id="btnLogin">Iniciar Sesión</button>
         </form>
 
     </section>
