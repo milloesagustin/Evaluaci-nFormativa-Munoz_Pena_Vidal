@@ -1,14 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // Capturamos AMBOS formularios
     const formRegistro = document.getElementById('registroForm');
+    const formLogin = document.getElementById('loginForm'); // Asegúrate que Nacho le ponga este ID al form del login
+
+    // Nuestra "base de datos" simulada
     const correosRegistrados = ['agu.pena@duocuc.cl', 'igna.munozo@duocuc.cl', 'oli.vidal@duocuc.cl']; 
+
 
     if (formRegistro) {
         formRegistro.addEventListener('submit', (evento) => {
             evento.preventDefault(); 
             limpiarErrores(); 
 
-            if (validarFormulario()) {
+            if (validarFormularioRegistro()) {
                 const correoNuevo = document.getElementById('correo').value.trim();
                 correosRegistrados.push(correoNuevo);
                 
@@ -18,7 +23,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function validarFormulario() {
+    if (formLogin) {
+        formLogin.addEventListener('submit', (evento) => {
+            evento.preventDefault();
+            limpiarErrores();
+
+            let esValido = true;
+            // Asegúrate que en login.html los inputs tengan estos IDs: id="correoLogin" e id="passwordLogin"
+            const correoIngresado = document.getElementById('correoLogin').value.trim();
+            const passwordIngresada = document.getElementById('passwordLogin').value;
+
+            // Validación: Comprobar si el correo existe en nuestro arreglo
+            if (!correosRegistrados.includes(correoIngresado)) {
+                // El requerimiento pide informar si es incorrecto[cite: 1]
+                mostrarError('errorLogin', 'Nombre de usuario o contraseña incorrectos.'); 
+                esValido = false;
+            } 
+            
+            // Verificamos que la contraseña no esté vacía
+            if (passwordIngresada === '') {
+                mostrarError('errorLogin', 'Por favor, ingresa tu contraseña.');
+                esValido = false;
+            }
+
+            if (esValido) {
+                alert("¡Bienvenido a ZONALIBROS!");
+                // Aquí en el futuro se redirigiría a la página principal
+            }
+        });
+    }
+
+
+
+    function validarFormularioRegistro() {
         let esValido = true;
         
         //Validar Nombre
@@ -69,15 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return esValido;
     }
 
-    //Funciones AUX
-
+    // Funciones AUX 
     function esSoloTexto(texto) {
-        // Definimos qué caracteres son válidos
         const permitidos = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóúÁÉÍÓÚ ";
         for (let i = 0; i < texto.length; i++) {
-            if (!permitidos.includes(texto[i])) {
-                return false; // Si encuentra un carácter raro, falla inmediatamente
-            }
+            if (!permitidos.includes(texto[i])) return false; 
         }
         return true;
     }
@@ -85,44 +118,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function esSoloNumeros(texto) {
         const numeros = "0123456789";
         for (let i = 0; i < texto.length; i++) {
-            if (!numeros.includes(texto[i])) {
-                return false;
-            }
+            if (!numeros.includes(texto[i])) return false;
         }
         return true;
     }
 
     function esPasswordSegura(password) {
-        // Validamos el largo mínimo
         if (password.length < 10) return false;
-
-        let tieneMayuscula = false;
-        let tieneMinuscula = false;
-        let tieneNumero = false;
-        let tieneEspecial = false;
+        let tieneMayuscula = false, tieneMinuscula = false, tieneNumero = false, tieneEspecial = false;
         const caracteresEspeciales = "@#$%"; 
-
-        // Revisamos letra por letra usando el ciclo for
         for (let i = 0; i < password.length; i++) {
             let letra = password[i];
-
-            if (letra >= 'A' && letra <= 'Z') {
-                tieneMayuscula = true;
-            } else if (letra >= 'a' && letra <= 'z') {
-                tieneMinuscula = true;
-            } else if (letra >= '0' && letra <= '9') {
-                tieneNumero = true;
-            } else if (caracteresEspeciales.includes(letra)) {
-                tieneEspecial = true;
-            }
+            if (letra >= 'A' && letra <= 'Z') tieneMayuscula = true;
+            else if (letra >= 'a' && letra <= 'z') tieneMinuscula = true;
+            else if (letra >= '0' && letra <= '9') tieneNumero = true;
+            else if (caracteresEspeciales.includes(letra)) tieneEspecial = true;
         }
-
-        // Retorna verdadero solo si TODAS las condiciones se cumplieron
         return tieneMayuscula && tieneMinuscula && tieneNumero && tieneEspecial;
     }
 
-    // --- FUNCIONES DE INTERFAZ ---
-
+    // Funciones de Interfaz
     function mostrarError(idElemento, mensaje) {
         const spanError = document.getElementById(idElemento);
         if (spanError) {
