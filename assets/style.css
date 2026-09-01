@@ -22,12 +22,15 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
     color: #333;
+    letter-spacing: 1px;
 }
 
 .logo span {
@@ -45,17 +48,23 @@ header {
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    padding: 8px 12px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.nav a:hover {
+    color: #0056b3;
 }
 
 .nav a.btn {
     background-color: #000;
     color: #fff;
-    border-radius: 4px;
 }
 
 .nav a.btn:hover {
-    background-color: #444;
+    background-color: #333;
+    color: #fff;
 }
 
 /* Textos principales */
@@ -64,25 +73,38 @@ header {
     padding: 2rem 2rem 1rem 2rem;
 }
 
-h2 {
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #222;
+}
+
+.hero p {
+    color: #666;
+    font-size: 1.05rem;
+}
+
+h2, h3 {
     text-align: center;
     margin-bottom: 1.5rem;
+    color: #222;
 }
 
 /* Contenedores Blancos (Registro y Login unificados) */
 .form-container, 
 #loginForm {
-    max-width: 500px;
+    max-width: 520px;
+    width: 92%;
     margin: 0 auto 2rem auto;
     background: #fff;
-    padding: 2.5rem;
+    padding: 2.2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
 }
 
 /* Cajas de agrupación para Labels e Inputs */
-.form-group, 
-#loginForm div:not(#errorLogin) {
+.form-group {
     margin-bottom: 1.2rem;
     display: flex;
     flex-direction: column;
@@ -92,8 +114,8 @@ h2 {
 label {
     font-weight: bold;
     margin-bottom: 6px;
-    font-size: 0.9rem;
-    color: #444;
+    font-size: 0.88rem;
+    color: #333;
 }
 
 /* Cajas de texto */
@@ -101,68 +123,162 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"] {
-    padding: 10px;
+    padding: 11px 13px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
     width: 100%;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fff;
 }
 
 input:focus {
     border-color: #0056b3;
     outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
 }
 
 /* Sección de Checkboxes (Géneros Literarios) */
 .checkbox-group p {
     font-weight: bold;
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    color: #333;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
 .checkbox-group label {
     font-weight: normal;
     display: inline-flex;
     align-items: center;
-    margin-right: 15px;
-    margin-bottom: 8px;
+    margin: 0;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .checkbox-group input[type="checkbox"] {
-    margin-right: 6px;
-    width: auto;
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
 }
 
-/* Botones Principales (Registrar e Iniciar Sesión) */
+/* Botones Principales */
+button.btn,
 button[type="submit"] {
     background-color: #000;
     color: #fff;
     padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
     width: 100%;
-    margin-top: 15px;
-    transition: background-color 0.3s;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
+button.btn:hover,
 button[type="submit"]:hover {
-    background-color: #333;
+    background-color: #222;
 }
 
-/* Mensajes de Error JS */
+/* Enlaces del Pie de Formulario */
+.form-footer-links {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.92rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.link-primary {
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-primary:hover {
+    text-decoration: underline;
+}
+
+.link-secondary {
+    color: #555;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.link-secondary:hover {
+    color: #0056b3;
+}
+
+.register-prompt {
+    color: #666;
+}
+
+/* Tarjeta de Recuperación de Contraseña */
+.recovery-card {
+    margin-top: 1.5rem;
+    border-left: 4px solid #0056b3;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.recovery-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.btn-recovery {
+    background-color: #0056b3;
+}
+
+.btn-recovery:hover {
+    background-color: #004085;
+}
+
+.btn-cancel {
+    background-color: #e2e8f0;
+    color: #333;
+    margin-top: 8px;
+}
+
+.btn-cancel:hover {
+    background-color: #cbd5e1;
+}
+
+/* Mensajes de Error y Éxito */
 .error-msg, 
 .error {
     color: #d93025;
     font-size: 0.85rem;
     font-weight: bold;
     min-height: 18px;
-    margin-top: 5px;
+    margin-top: 6px;
+    display: block;
+}
+
+.success-msg {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border: 1px solid #badbcc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Sección de Imagen Central en Home */
@@ -171,7 +287,7 @@ button[type="submit"]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 2rem 1rem;
 }
 
 .home-image-wrapper {
@@ -184,9 +300,15 @@ button[type="submit"]:hover {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     display: block;
     margin: 0 auto;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Pie de página */
@@ -197,4 +319,5 @@ footer {
     margin-top: auto;
     font-size: 0.9rem;
     color: #555;
+    border-top: 1px solid #ddd;
 }

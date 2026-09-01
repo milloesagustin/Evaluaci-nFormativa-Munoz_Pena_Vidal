@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
     <link rel="stylesheet" href="assets/style.css">
     <script src="main.js"></script>
 </head>
-
 
 <body>
 
@@ -24,33 +22,61 @@
         </nav>
     </header>
 
+    <main>
+        <section class="hero">
+            <h1>ZONALIBROS</h1>
+            <p>Ingresa a tu cuenta para acceder a la colección de libros</p>
+        </section>
 
-    <section class="hero">
-        <h1>ZONALIBROS</h1>
-        <p>inicia sesion bro, si esta mala te lo diré</p>
-    </section>
+        <!-- Formulario de Inicio de Sesión -->
+        <section class="login-section">
+            <h2>INICIO DE SESIÓN</h2>
 
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="correoLogin">Correo Electrónico:</label>
+                    <input type="email" id="correoLogin" name="correoLogin" placeholder="ejemplo@duoc.cl">
+                </div>
 
-    <section class="Inicio de sesión">
-        <h2> INICIO DE SESIÓN</h2>
+                <div class="form-group">
+                    <label for="passwordLogin">Contraseña:</label>
+                    <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Tu contraseña">
+                </div>
 
-        <form id="loginForm" novalidate>
-            <div>
-                <label for="correoLogin">Correo Electrónico:</label>
-                <input type="email" id="correoLogin" name="correoLogin">
-            </div>
+                <div id="errorLogin" class="error-msg error" style="display: none;"></div>
 
-            <div>
-                <label for="passwordLogin">Contraseña:</label>
-                <input type="password" id="passwordLogin" name="passwordLogin">
-            </div>
+                <button type="submit" id="btnLogin" class="btn">Iniciar Sesión</button>
 
-            <div id="errorLogin" class="error" style="color: red; display: none;"></div>
+                <!-- Opciones de acceso y recuperación -->
+                <div class="form-footer-links">
+                    <p>
+                        <a href="#recuperar" id="btnToggleRecuperar" class="link-secondary">¿Olvidaste tu contraseña?</a>
+                    </p>
+                    <p class="register-prompt">
+                        ¿No tienes una cuenta? <a href="registro.html" class="link-primary">Regístrate aquí</a>
+                    </p>
+                </div>
+            </form>
 
-            <button type="submit" id="btnLogin">Iniciar Sesión</button>
-        </form>
-
-    </section>
+            <!-- Sección de Recuperación de Contraseña (Objetivo Caso 2) -->
+            <article id="seccionRecuperar" class="form-container recovery-card" style="display: none;">
+                <h3>Recuperación de Contraseña</h3>
+                <p class="recovery-text">
+                    Ingresa tu correo institucional registrado (@duoc.cl) y te enviaremos las instrucciones para recuperar tu acceso.
+                </p>
+                <form id="recuperarForm" novalidate>
+                    <div class="form-group">
+                        <label for="correoRecuperar">Correo Institucional:</label>
+                        <input type="email" id="correoRecuperar" placeholder="usuario@duoc.cl">
+                        <span id="errorRecuperar" class="error-msg error" style="display: none;"></span>
+                        <div id="mensajeRecuperar" class="success-msg" style="display: none;"></div>
+                    </div>
+                    <button type="submit" class="btn btn-recovery">Enviar Instrucciones</button>
+                    <button type="button" id="btnCancelarRecuperar" class="btn btn-cancel">Cancelar</button>
+                </form>
+            </article>
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2026 ZONALIBROS. Todos los derechos reservados.</p>
