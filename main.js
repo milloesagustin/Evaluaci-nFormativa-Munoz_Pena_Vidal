@@ -1,12 +1,5 @@
-/**
- * ZONALIBROS - Sistema de Registro, Login y Recuperación de Contraseña
- * Evaluación Formativa 1 - Caso 2
- * Integrantes: Muñoz, Peña, Vidal
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Captura de Formularios
+    // Captura de elementos del DOM
     const formRegistro = document.getElementById('registroForm');
     const formLogin = document.getElementById('loginForm');
     const formRecuperar = document.getElementById('recuperarForm');
@@ -14,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const seccionRecuperar = document.getElementById('seccionRecuperar');
     const btnCancelarRecuperar = document.getElementById('btnCancelarRecuperar');
 
-    // Base de datos simulada de correos registrados (usuarios con dominio institucional @duoc.cl / @duocuc.cl)
+    // Correos registrados de prueba
     const correosRegistrados = [
         'agu.pena@duoc.cl', 
         'igna.munoz@duoc.cl', 
@@ -24,9 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'oli.vidal@duocuc.cl'
     ]; 
 
-    /* ==========================================================================
-       1. LÓGICA DE REGISTRO DE USUARIOS
-       ========================================================================== */
+    // Manejo del formulario de registro
     if (formRegistro) {
         formRegistro.addEventListener('submit', (evento) => {
             evento.preventDefault(); 
@@ -43,9 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==========================================================================
-       2. LÓGICA DE INICIO DE SESIÓN (LOGIN)
-       ========================================================================== */
+    // Manejo del formulario de login
     if (formLogin) {
         formLogin.addEventListener('submit', (evento) => {
             evento.preventDefault();
@@ -58,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const correoIngresado = correoInput ? correoInput.value.trim().toLowerCase() : '';
             const passwordIngresada = passwordInput ? passwordInput.value : '';
 
-            // Validación de campos vacíos
             if (correoIngresado === '') {
                 mostrarError('errorLogin', 'Por favor, ingresa tu correo electrónico.');
                 esValido = false;
@@ -66,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrarError('errorLogin', 'Por favor, ingresa tu contraseña.');
                 esValido = false;
             } else if (!correosRegistrados.includes(correoIngresado)) {
-                // Notificación clara y segura si usuario o contraseña no coinciden
                 mostrarError('errorLogin', 'Nombre de usuario o contraseña incorrectos. Si olvidaste tu clave, utiliza la opción de recuperación.');
                 esValido = false;
             }
@@ -78,10 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==========================================================================
-       3. LÓGICA DE RECUPERACIÓN DE CONTRASEÑA (Caso 2 Zonalibros)
-       ========================================================================== */
-    // Mostrar / Ocultar formulario de recuperación
+    // Mostrar u ocultar sección de recuperación de contraseña
     if (btnToggleRecuperar && seccionRecuperar) {
         btnToggleRecuperar.addEventListener('click', (e) => {
             e.preventDefault();
@@ -97,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Manejo del formulario de recuperación
     if (formRecuperar) {
         formRecuperar.addEventListener('submit', (evento) => {
             evento.preventDefault();
@@ -129,13 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==========================================================================
-       4. VALIDACIONES DETALLADAS DEL FORMULARIO DE REGISTRO
-       ========================================================================== */
+    // Validar datos del registro
     function validarFormularioRegistro() {
         let esValido = true;
         
-        // 1. Validar Nombre Completo (No vacío, solo letras y espacios, máx 100 caracteres)
+        // Validar nombre
         const nombre = document.getElementById('nombre').value.trim();
         if (nombre === '') {
             mostrarError('errorNombre', 'El nombre completo es obligatorio.');
@@ -148,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             esValido = false;
         }
 
-        // 2. Validar Correo Electrónico (Solo @duoc.cl, único en el sistema, máx 60 caracteres)
+        // Validar correo institucional
         const correo = document.getElementById('correo').value.trim().toLowerCase();
         if (correo === '') {
             mostrarError('errorCorreo', 'El correo electrónico es obligatorio.');
@@ -164,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             esValido = false;
         }
 
-        // 3. Validar Contraseña (Mínimo 10 caracteres, 2 mayúsculas, 1 minúscula, 1 número, 1 carácter especial @#$% )
+        // Validar contraseña
         const password = document.getElementById('password').value;
         if (password === '') {
             mostrarError('errorPassword', 'La contraseña es obligatoria.');
@@ -174,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             esValido = false;
         }
 
-        // 4. Confirmación de Contraseña (Debe coincidir con la contraseña ingresada)
+        // Validar confirmación de contraseña
         const confirmPassword = document.getElementById('confirmPassword').value;
         if (confirmPassword === '') {
             mostrarError('errorConfirmPassword', 'Debes confirmar tu contraseña.');
@@ -184,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             esValido = false;
         }
 
-        // 5. Validar Teléfono (Opcional, pero si se ingresa debe ser numérico y válido entre 8 y 12 dígitos)
+        // Validar teléfono opcional
         const telefono = document.getElementById('telefono').value.trim();
         if (telefono !== '') {
             if (!esSoloNumeros(telefono)) {
@@ -196,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 6. Validar Géneros Favoritos (Debe seleccionar al menos uno)
+        // Validar género
         const generosSeleccionados = document.querySelectorAll('input[name="genero"]:checked');
         if (generosSeleccionados.length === 0) {
             mostrarError('errorGenero', 'Debes seleccionar al menos un género literario favorito.');
@@ -206,10 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return esValido;
     }
 
-    /* ==========================================================================
-       5. FUNCIONES AUXILIARES DE VALIDACIÓN
-       ========================================================================== */
-    // Comprobar que solo tenga caracteres alfabéticos (con tildes, ñ) y espacios
+    // Funciones auxiliares
     function esSoloTexto(texto) {
         const permitidos = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóúÁÉÍÓÚ ";
         for (let i = 0; i < texto.length; i++) {
@@ -218,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    // Comprobar que solo tenga caracteres numéricos
     function esSoloNumeros(texto) {
         const numeros = "0123456789";
         for (let i = 0; i < texto.length; i++) {
@@ -227,14 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    // Comprobar formato de correo y dominio obligatorio @duoc.cl o @duocuc.cl
     function esCorreoDuocValido(correo) {
         if (!correo || correo.length > 60) return false;
         const patronCorreoDuoc = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|duocuc\.cl)$/i;
         return patronCorreoDuoc.test(correo);
     }
 
-    // Validar contraseña con mínimo 10 caracteres, 2 mayúsculas, 1 minúscula, 1 número y 1 carácter especial (@#$%)
     function esPasswordSegura(password) {
         if (password.length < 10) return false;
         
@@ -260,9 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return (countMayusculas >= 2 && countMinusculas >= 1 && countNumeros >= 1 && countEspeciales >= 1);
     }
 
-    /* ==========================================================================
-       6. FUNCIONES DE MANIPULACIÓN DE MENSAJES DE INTERFAZ
-       ========================================================================== */
+    // Mostrar y limpiar mensajes de error
     function mostrarError(idElemento, mensaje) {
         const spanError = document.getElementById(idElemento);
         if (spanError) {
